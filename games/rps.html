@@ -35,18 +35,38 @@
     <div id="game" class="collapse">
         <div class="container my-3 text-center">
             <h1 class="h-font">Hearts left: 
-                <a id="hearts" class="text-danger text-decoration-none">
-                    <i class="bi bi-heart-fill fs-1 me-1"></i>
-                    <i class="bi bi-heart-fill fs-1 me-1"></i>
-                    <i class="bi bi-heart-fill fs-1 me-1"></i>
-                    <i class="bi bi-heart-fill fs-1 me-1"></i>
-                    <i class="bi bi-heartbreak fs-1 me-1"></i>
-                </a>
+                <a id="hearts" class="text-danger text-decoration-none"></a>
             </h1>
-            <p>Choose your hand:</p>
-            <button id="rock-btn" class="btn btn-primary">Rock</button>
-            <button id="paper-btn" class="btn btn-primary">Paper</button>
-            <button id="scissors-btn" class="btn btn-primary">Scissors</button>
+            <h1 class="h-font">Highscore: 
+                <a id="highscore" class="text-success text-decoration-none"></a>
+            </h1>
+            <h1 class="h-font">Wins: 
+                <a id="wins" class="text-success text-decoration-none"></a>
+            </h1>
+            <p id="text-display">Choose your hand:</p>
+            <div id="hand-choices">
+                <button id="rock-btn" class="btn btn-primary">Rock</button>
+                <button id="paper-btn" class="btn btn-primary">Paper</button>
+                <button id="scissors-btn" class="btn btn-primary">Scissors</button>
+            </div>
+            <div id="continue" class="collapse">
+                <button id="continue-btn" class="btn btn-primary">Continue</button>
+            </div>
+            <button id="restart-btn" class="collapse">Try Again</button>
+        </div>
+        <div class="container my-3 d-flex">
+            <div class="rounded-box mx-2" style="top:0">
+                <h5 class="h-font">YOUR HAND</h5>
+                <img id="player_rock" class="collapse" width="50%" src="../images/rock.png" alt="Rock">
+                <img id="player_paper" class="collapse" width="50%" src="../images/paper.png" alt="Paper">
+                <img id="player_scissors" class="collapse" width="50%" src="../images/scissors.png" alt="Scissors">
+            </div>
+            <div class="rounded-box mx-2" style="top:0">
+                <h5 class="h-font">COMPUTER'S HAND</h5>
+                <img id="com_rock" class="collapse" width="50%" src="../images/rock.png" alt="Rock">
+                <img id="com_paper" class="collapse" width="50%" src="../images/paper.png" alt="Paper">
+                <img id="com_scissors" class="collapse" width="50%" src="../images/scissors.png" alt="Scissors">
+            </div>
         </div>
     </div>
 
