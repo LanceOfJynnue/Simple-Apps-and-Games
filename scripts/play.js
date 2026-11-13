@@ -8,6 +8,8 @@ const restartbutton = document.getElementById('restart-btn');
 let hearts = 0;
 let wins = 0;
 let highscore = 0;
+let seconds = 0;
+let countDown = null;
 
 startGame = () => {
     hearts = 5;
@@ -24,61 +26,82 @@ startGame = () => {
     document.getElementById('highscore').innerHTML = highscore;
 };
 
+stopCountDown = () => {
+    clearInterval(countDown);
+    countDown = null;
+}
+
 gameplay = (playerChoice) => {
     const choices = ['rock', 'paper', 'scissors'];
     const computerChoice = choices[Math.floor(Math.random() * choices.length)];
     document.getElementById('hand-choices').setAttribute("class", "collapse");
+    seconds = 0;
+    textDisplay.textContent = "Rock!";
 
-    if (playerChoice === "rock"){
-        document.getElementById('player_rock').removeAttribute("class", "collapse");
-    } else if (playerChoice === "paper"){
-        document.getElementById('player_paper').removeAttribute("class", "collapse");
-    } else if (playerChoice === "scissors"){
-        document.getElementById('player_scissors').removeAttribute("class", "collapse");
-    }
-
-    if (computerChoice === "rock"){
-        document.getElementById('com_rock').removeAttribute("class", "collapse");
-    } else if (computerChoice === "paper"){
-        document.getElementById('com_paper').removeAttribute("class", "collapse");
-    } else if (computerChoice === "scissors"){
-        document.getElementById('com_scissors').removeAttribute("class", "collapse");
-    }
-
-    if (playerChoice === computerChoice) {
-        textDisplay.textContent = "It's a tie!";
-        document.getElementById('continue').removeAttribute("class", "collapse");
-    } else if (
-        (playerChoice === "rock" && computerChoice === "scissors")||
-        (playerChoice === "scissors" && computerChoice === "paper")||
-        (playerChoice === "paper" && computerChoice === "rock")
-    ) {
-        textDisplay.textContent = "You won!";
-        wins += 1;
-        document.getElementById('wins').innerHTML = wins;
-        document.getElementById('continue').removeAttribute("class", "collapse");
-    } else if (
-        (computerChoice === "rock" && playerChoice === "scissors")||
-        (computerChoice === "scissors" && playerChoice === "paper")||
-        (computerChoice === "paper" && playerChoice === "rock")
-    ) {
-        hearts -= 1;
-        heartsDisplay = '';
-        for (let i = 0; i < hearts; i++) {
-            heartsDisplay += '<i class="bi bi-heart-fill fs-1 me-1"></i>';
-        }
-        for (let i = 0; i < 5 - hearts; i++) {
-            heartsDisplay += '<i class="bi bi-heartbreak fs-1 me-1"></i>';
-        }
-        document.getElementById('hearts').innerHTML = heartsDisplay;
-        if (hearts === 0) {
-            textDisplay.textContent = "GAME OVER";
-            document.getElementById('restart-btn').removeAttribute("class", "collapse");
+    countDown = setInterval(() => {
+        seconds++;
+        if (seconds === 1){
+            textDisplay.textContent = "Rock! Paper!";
+        } else if (seconds === 2){
+            textDisplay.textContent = "Rock! Paper! Scissors!";
+        } else if (seconds === 3){
+            textDisplay.textContent = "Shoot!";
         } else {
-            textDisplay.textContent = "You just lost a heart!";
-            document.getElementById('continue').removeAttribute("class", "collapse");
+            if (playerChoice === "rock"){
+                document.getElementById('player_rock').removeAttribute("class", "collapse");
+            } else if (playerChoice === "paper"){
+                document.getElementById('player_paper').removeAttribute("class", "collapse");
+            } else if (playerChoice === "scissors"){
+                document.getElementById('player_scissors').removeAttribute("class", "collapse");
+            }
+
+            if (computerChoice === "rock"){
+                document.getElementById('com_rock').removeAttribute("class", "collapse");
+            } else if (computerChoice === "paper"){
+                document.getElementById('com_paper').removeAttribute("class", "collapse");
+            } else if (computerChoice === "scissors"){
+                document.getElementById('com_scissors').removeAttribute("class", "collapse");
+            }
+
+            if (playerChoice === computerChoice) {
+                textDisplay.textContent = "It's a tie!";
+                document.getElementById('continue').removeAttribute("class", "collapse");
+            } else if (
+                (playerChoice === "rock" && computerChoice === "scissors")||
+                (playerChoice === "scissors" && computerChoice === "paper")||
+                (playerChoice === "paper" && computerChoice === "rock")
+            ) {
+                textDisplay.textContent = "You won!";
+                wins += 1;
+                document.getElementById('wins').innerHTML = wins;
+                document.getElementById('continue').removeAttribute("class", "collapse");
+            } else if (
+                (computerChoice === "rock" && playerChoice === "scissors")||
+                (computerChoice === "scissors" && playerChoice === "paper")||
+                (computerChoice === "paper" && playerChoice === "rock")
+            ) {
+                hearts -= 1;
+                heartsDisplay = '';
+                for (let i = 0; i < hearts; i++) {
+                    heartsDisplay += '<i class="bi bi-heart-fill fs-1 me-1"></i>';
+                }
+                for (let i = 0; i < 5 - hearts; i++) {
+                    heartsDisplay += '<i class="bi bi-heartbreak fs-1 me-1"></i>';
+                }
+                document.getElementById('hearts').innerHTML = heartsDisplay;
+                if (hearts === 0) {
+                    textDisplay.textContent = "GAME OVER";
+                    document.getElementById('restart-btn').removeAttribute("class", "collapse");
+                } else {
+                    textDisplay.textContent = "You just lost a heart!";
+                    document.getElementById('continue').removeAttribute("class", "collapse");
+                }
+            }
+            stopCountDown();
         }
-    }
+    }, 500);
+    
+    
 }
 
 document.addEventListener("DOMContentLoaded", function() {
