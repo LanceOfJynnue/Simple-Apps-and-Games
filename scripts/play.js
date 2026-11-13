@@ -10,6 +10,6 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 button.addEventListener('click', () => {
-    document.getElementById('page').addAttribute("class", "collapse");
     document.getElementById('game').removeAttribute("class", "collapse");
+    document.getElementById('page').setAttribute("class", "collapse");
 });
